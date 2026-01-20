@@ -1,10 +1,10 @@
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration from the request
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBUZfjP8iomzCRe0SUeHGVmLBz09B-Afr8",
   authDomain: "bank-90ddd.firebaseapp.com",
@@ -26,7 +26,11 @@ export const db = getFirestore(app);
 // Analytics is optional and only works in browser environments
 let analytics = null;
 if (typeof window !== "undefined") {
-  analytics = getAnalytics(app);
+  try {
+    analytics = getAnalytics(app);
+  } catch (e) {
+    console.warn("Firebase Analytics could not be initialized:", e);
+  }
 }
 
 export { analytics };
