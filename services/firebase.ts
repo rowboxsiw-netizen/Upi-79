@@ -4,7 +4,6 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBUZfjP8iomzCRe0SUeHGVmLBz09B-Afr8",
   authDomain: "bank-90ddd.firebaseapp.com",
@@ -16,20 +15,16 @@ const firebaseConfig = {
   measurementId: "G-SHNTS4X7PG"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Services
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-// Analytics is optional and only works in browser environments
 let analytics = null;
 if (typeof window !== "undefined") {
   try {
     analytics = getAnalytics(app);
   } catch (e) {
-    console.warn("Firebase Analytics could not be initialized:", e);
+    console.warn("Analytics blocked or failed:", e);
   }
 }
 
